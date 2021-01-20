@@ -4,22 +4,33 @@
     <head>
 
         <meta charset="utf-8">
-            <title>Gazetteer | IT Career Switch</title>
+            <title>Gazetteer | IT Career</title>
         <meta name="author" content="Artur Knul">
         <meta name="description" content="gazetteer">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <link href="favicon.ico" rel="icon">
+        <link rel="stylesheet" href="style.css">
         <link href="vendors/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/leaflet.css" rel="stylesheet">
-        <link href="css/theme_1609281920189.css">
+
         <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+              crossorigin=""/>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"   rel="stylesheet">
+          
+
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                crossorigin=""></script>    
         <script src="vendors/jquery/jquery.js"></script>
         <script src="vendors/jquery/jquery.min.js"></script>
 
@@ -27,133 +38,301 @@
 
     <body>
 
-      <div id="map">
-  
-        <button type="button" class="btn btn-primary openBtn">Gazetteer</button>
-    
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">dynamic content</h4>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <!--dynamic content-->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary pt-2">
 
-    <button type="button" class="btn btn-primary openBtn"> More info</button>
-    
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
+      <button class="modal-open">Gazetteer</button>
+
+      <button class="modal-open"><a href="more.html">More info</a></button>
+
+      <!-- or <button onclick="document.getElementById('more').style.display='block'" class="modal-open">Login</button> -->
+      
+      <button class="modal-open" data-modal="modal1">Weather</button>
+
+      <button class="modal-open" data-modal="modal2">Currency</button>
+      
+      <button class="modal-open" data-modal="modal3">Credits</button>
+         
+      <div class="modal" id="modal1">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">dynamic content</h4>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <!--dynamic content-->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
+         <div class="modal-header">Weather conditions
+           <button class="icon modal-close"><i class="material-icons">close</i></button>
+         </div>
+         <!-- id here -->
+         <div class="modal-body">
+
+          <table>
+            <tr>
+              <th colspan="2">Day: </th>
+              <th></td></th>
+              
+            </tr>
+            <tr>
+              <td class="td2" colspan="2">Place:</td>
+              <td>
+              <!-- id -->
+              </td>
+            </tr>
+  
+  
+            <tr>
+              <tr>
+  
+                <td class="td1">
+                    Conditions: 
+                </td>
+                <td id="txtContinentName">
+                    
+                </td>
+  
+            </tr>
+  
+            <tr>
+          
+                <td class="td1">
+                    Temperature: 
+                </td>
+                <td>
+                    
+                </td>
+  
+            </tr>
+  
+              <tr>
+              
+                <td class="td1">
+                  Feels like: 
+                </td>
+                <td>
+    
+                </td>
+  
+              </tr>
+  
+              <tr>
+               
+                <td class="td1">
+                  Humidity: 
+                </td>
+                <td>
+    
+                </td>
+  
+              </tr>
+  
+              <tr>
+   
+                <td class="td1">
+                    Pressure: 
+                </td>
+                <td>
+                    
+                </td>
+              </tr>
+  
+              <tr>
+     
+                <td class="td1">
+                    Wind: 
+                </td>
+                <td>
+                    
+                </td>
+              </tr>
+  
+              <tr>
+     
+                <td class="td1">
+                    Sunrise: 
+                </td>
+                <td>
+                    
+                </td>
+              </tr>
+  
+              <tr>
+             
+                <td class="td1">
+                    Sunset: 
+                </td>
+                <td>
+                    
+                </td>
+  
+            </tr>
+  
+          </tr>
+        
+          </table>
+
+         </div> 
+         <div class="modal-footer"><button class="link modal-close">Close</button></div>
         </div>
       </div>
-    </div>
+      
+      <div class="modal" id="modal2">
+       <div class="modal-content">
+        <div class="modal-header">Currencies exchange rates
+          <button class="icon modal-close"><i class="material-icons">close</i></button>
+        </div>
+        <!-- id here -->
+        <div class="modal-body">
+
+          <table>
+            <tr>
+              <th colspan="2">Day: </th>
+              <th></td></th>
+              
+            </tr>
+            <tr>
+              <td class="td2" colspan="2">Exchange rate (for country): </td>
+              <td>
+              <!-- id? -->
+              </td>
+            </tr>
   
+  
+            <tr>
+              <tr>
+  
+                <td class="td1">
+                    Country: 
+                </td>
+                <!-- <td id="txtCountryName">
+                    
+                </td>? -->
+  
+            </tr>
+  
+            <tr>
+          
+                <td class="td1">
+                    Country: 
+                </td>
+                
+  
+            </tr>
+  
+              <tr>
+              
+                <td class="td1">
+                  Country: 
+                </td>
+  
+              </tr>
+  
+              <tr>
+               
+                <td class="td1">
+                  Country: 
+                </td>
+  
+              </tr>
+  
+              <tr>
+   
+                <td class="td1">
+                  Country: 
+                </td>
+
+              </tr>
+  
+              <tr>
+     
+                <td class="td1">
+                  Country: 
+                </td>
+              
+              </tr>
+  
+              <tr>
+     
+                <td class="td1">
+                  Country: 
+                </td>
+                
+              </tr>
+            </tr>
+            
+          </tr>
+          
+          </table>
+
+        </div> 
+        <div class="modal-footer"><button class="link modal-close">Close</button></div>
+       </div>
+      </div>
+      
+      <div class="modal" id="modal3">
+       <div class="modal-content">
+        <div class="modal-header">App based on:
+          <button class="icon modal-close"><i class="material-icons">close</i></button>
+        </div>
+        <!-- id here -->
+        <div class="modal-body">
+
+          <ul class="text-left">
+        
+            <li>Geo Names <a href="https://www.geonames.org/">https://www.geonames.org</a></li>
+            <li>Exchange Rates API <a href="https://exchangeratesapi.io/" class="text-decoration-none">https://exchangeratesapi.io</a></li>
+            <li><a href="https://restcountries.eu/" class="text-decoration-none">https://restcountries.eu</a></li>
+            </ul>`;
+
+        </div> 
+        <div class="modal-footer"><button class="link modal-close">Close</button></div>
+       </div>
       </div>
 
+     </nav>
 
-
-    
-
-   <!--to add preloader here-->
+      <div id="entryMap" style="width: 100vw; height: 800px">
+  
+      </div>
    
-   <script src="leaflet.js"></script>
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script> 
+<script> 
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
-   <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.js"></script>
-
-   <script>
-
-       var map = L.map('map').setView([-41.2858, 174.7868], 5);
-       mapLink = 
-           '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-       L.tileLayer(
-           'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-           attribution: '&copy; ' + mapLink + ' Contributors',
-           maxZoom: 18,
-           }).addTo(map);
-
-   // Add an SVG element to Leaflet’s overlay pane
-        var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-            g = svg.append("g").attr("class", "leaflet-zoom-hide");
+   // Initialize the map 
+   const entryMap = L.map('entryMap');
+ 
+   // Get the tile layer from OpenStreetMaps 
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+ 
+   // Specify the maximum zoom of the map 
+   maxZoom: 19, 
+ 
+   // Set the attribution for OpenStreetMaps 
+   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
+   }).addTo(entryMap); 
+ 
+   // Set the view of the map 
+   // with the latitude, longitude and the zoom value 
+   //map.setView([48.8584, 2.2945], 16); 
      
-    d3.json("countryBorders.geo.json", function(geoShape) {
-   
-   //  create a d3.geo.path to convert GeoJSON to SVG
-        var transform = d3.geo.transform({point: projectPoint}),
-             path = d3.geo.path().projection(transform);
-
-   // create path elements for each of the features
-    d3_features = g.selectAll("path")
-     .data(geoShape.features)
-     .enter().append("path");
-
-    map.on("viewreset", reset);
-
-    reset();
-
-   // fit the SVG element to leaflet's map layer
-   function reset() {
-       
-     bounds = path.bounds(geoShape);
-
-     var topLeft = bounds[0],
-       bottomRight = bounds[1];
-
-     svg .attr("width", bottomRight[0] - topLeft[0])
-       .attr("height", bottomRight[1] - topLeft[1])
-       .style("left", topLeft[0] + "px")
-       .style("top", topLeft[1] + "px");
-
-     g .attr("transform", "translate(" + -topLeft[0] + "," 
-                                       + -topLeft[1] + ")");
-
-     // initialize the path data	
-     d3_features.attr("d", path)
-       .style("fill-opacity", 0.2)
-       .attr('fill','blue');
-   } 
-
-   // Use Leaflet to implement a D3 geometric transformation.
-   function projectPoint(x, y) {
-     var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-     this.stream.point(point.x, point.y);
-   }
-
    
 
- });
-
+   // Set the map view to the user's location 
+   // Uncomment below to set map according to user location 
+   entryMap.locate({setView: true, maxZoom: 13}); 
+ 
    
-   </script>
 
-<script>
-  $('.openBtn').on('click',function(){
-    $('.modal-body').load('content.html',function(){
-      $('#myModal').modal({show:true});
-    });
-   });
+   function onLocationFound(e) {
+     var radius = e.accuracy / 2;
+     L.marker(e.latlng).addTo(entryMap)
+       .bindPopup("You are within " + radius + " meters from this point").openPopup();
+     L.circle(e.latlng, radius).addTo(entryMap);
 
+}
+
+entryMap.on('locationfound', onLocationFound);
+entryMap.locate({setView: true, watch: true, maxZoom: 13});
+  
 </script>
+
+<script src="app.js"></script>
 
         <script src="vendors/jquery/jquery-2.2.3.min.js"></script>
         <script src="vendors/jquery/jquery.js"></script>
