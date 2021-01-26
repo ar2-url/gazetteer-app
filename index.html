@@ -35,12 +35,19 @@
         <script src="vendors/jquery/jquery.min.js"></script>
 
 
+        <!-- types of json  -->
+
+        <script type="text/javascript" src="countryBorders.geo.json"></script>
+
+
         <!-- js file added over here -->
         <script src="add.js"></script>  
+        
 
     </head>
 
     <body>
+
 
      <nav class="navbar navbar-expand-lg navbar-dark bg-secondary pt-2">
 
@@ -56,13 +63,39 @@
       
       <button class="modal-open" data-modal="modal3">Credits</button>
 
-      <!-- select with id in option  -->
+      
+      <select id="countrySelect" onchange="change_countrySelect(this.value)">
+        <option value="">Choose a country:</option>
+        <option value="customers">Countries</option>
+      </select>
+      
+      <p id="show"></p>
+      
+      <script>
+      function change_countrySelect(sel) {
+        var obj, dbParam, xmlhttp, myObj, x, txt = "";
+        obj = { table: sel, limit: 250 };
+        dbParam = JSON.stringify(obj);
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            myObj = JSON.parse(this.responseText);
+            txt += "<table border='1'>"
+            for (x in myObj) {
+              txt += "<tr><td>" + myObj[x].name + "</td></tr>";
+            }
+            txt += "</table>"    
+            document.getElementById("show").innerHTML = txt;
+            }
+          };
+        xmlhttp.open("POST", "php/ctr.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        xmlhttp.send("x=" + dbParam);
+      }
+      </script>
 
-      <div class="col-md-4"><select id="countrySelect" name="countrySelect" class="form-c">
 
-        <option value="#countrySelect"></option>
 
-      </select></div>
          
       <div class="modal" id="modal1">
         <div class="modal-content">
