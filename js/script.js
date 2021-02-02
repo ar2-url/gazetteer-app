@@ -1,99 +1,141 @@
-	$('#btnRun').click(function() {
+	$('#countrySelect').html('');
 
-		$.ajax({
-			url: "php/getCountryInfo.php",
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				country: $('#selCountry').val(),
-				lang: $('#selLanguage').val()
-			},
-			success: function(result) {
+ 
 
-				console.log(result);
+$.each(result.data, function(index) {
 
-				if (result.status.name == "ok") {
+ 
 
-					$('#txtContinentName').html(result['data'][0]['continentName']);
-					$('#txtCountryName').html(result['data'][0]['countryName']);
-					$('#txtCapital').html(result['data'][0]['capital']);
-					$('#txtLanguages').html(result['data'][0]['languages']);
-					$('#txtAreaInSqKm').html(result['data'][0]['areaInSqKm']);
-					$('#txtPopulation').html(result['data'][0]['population']);
-					$('#txtCurrencyCode').html(result['data'][0]['currencyCode']);
+    $('#countrySelect').append($("<option>", {
 
-				}
-			
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				// your error code
-			}
-		}); 
-	
+        value: result.data[index].code,
 
-	});
+        text: result.data[index].name
 
-	$('#btnRun2').click(function() {
 
-		$.ajax({
-			url: "php/getWikiInfo.php",
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				maxRows: $('#selRows').val(),
-				q: $('#selQuery').val()
-			},
-			success: function(result) {
+    })); 
 
-				console.log(result);
+ 
 
-				if (result.status.name == "ok") {
+});
 
-					$('#txtFeature').html(result['data'][0]['feature']);
-					$('#txtLng').html(result['data'][0]['lng']);
-					$('#txtLat').html(result['data'][0]['lat']);
-					$('#txtCountryCode').html(result['data'][0]['countryCode']);
-					$('#txtThumbnailImg').html(result['data'][0]['thumbnailImg']);
+function change_countrySelect(sel) {
+    var obj, dbParam, xmlhttp, myObj, x, txt = "";
+    obj = { table: sel, limit: 200 };
+    dbParam = JSON.stringify(obj);
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+        txt += "<table border='1'>"
+        for (x in myObj) {
+          txt += "<tr><td>" + myObj[x].name + "</td></tr>";
+        }
+        txt += "</table>"    
+        document.getElementById("show").innerHTML = txt;
+        }
+      };
+    xmlhttp.open("POST", "../php/ctr.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.send("x=" + dbParam);
+  }
 
-				}
-			
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				// your error code
-			}
-		}); 
-	
 
-	});
+//get modal buttons
+const modalBtns = document.querySelectorAll('.modal-open');
 
-	$('#btnRun3').click(function() {
+modalBtns.forEach(function(btn){
+    btn.onclick = function(){
+        const modal = btn.getAttribute('data-modal');
 
-		$.ajax({
-			url: "php/getNearbyInfo.php",
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				lng: $('#selNearbyLng').val(),
-				lat: $('#selNearbyLat').val()
-			},
-			success: function(result) {
+        document.getElementById(modal).style.display = 'block';
+    };
+});
 
-				console.log(result);
+const closeBtns = document.querySelectorAll('.modal-close');
 
-				if (result.status.name == "ok") {
+closeBtns.forEach(function(btn){
+    btn.onclick = function(){
+        const modal = (btn.closest('.modal').style.display = 'none');
+    };
+});
 
-					$('#txtTitle').html(result['data'][0]['title']);
-					$('#txtSummary').html(result['data'][0]['summary']);
-					$('#txtDistance').html(result['data'][0]['distance']);
-					$('#txtWikipediaUrl').html(result['data'][0]['wikipediaUrl']);
+window.onclick = function(e){
+    if(e.target.className == 'modal'){
+        e.target.style.display = 'none';
+    }
+};
 
-				}
-			
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				// your error code
-			}
-		}); 
-	
+//modal element
+var modal = document.getElementById('mainModal');
 
-	});
+//open modal
+var modalBtn = document.getElementById('modalBtn');
+
+// close button
+var closeBtn = document.getElementById('closeBtn');
+
+//listen for open click
+modalBtn.addEventListener('click', openModal);
+
+//listen for close click
+modalBtn.addEventListener('click', closeModal);
+
+//listen for outside click
+window.addEventListener('click', clickOutside);
+
+//function to open modal
+function openModal(){
+    modal2.style.display = 'block';
+}
+
+//function to close modal
+function closeModal(){
+    modal.style.display = 'none';
+}
+
+//function to close modal if outside click
+function clickOutside(e){
+    if(e.target == modal){
+        modal2.style.display = 'none';
+    }
+    
+};
+
+// map
+
+// Initialize the map 
+const entryMap = L.map('entryMap');
+  
+// Get the tile layer from OpenStreetMaps 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+
+// Specify the maximum zoom of the map 
+maxZoom: 19, 
+
+// Set the attribution for OpenStreetMaps 
+attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
+}).addTo(entryMap); 
+
+// Set the view of the map 
+// with the latitude, longitude and the zoom value 
+//map.setView([48.8584, 2.2945], 16); 
+  
+
+
+// Set the map view to the user's location 
+// Uncomment below to set map according to user location 
+entryMap.locate({setView: true, maxZoom: 13}); 
+
+
+
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+  L.marker(e.latlng).addTo(entryMap)
+	.bindPopup("You are within " + radius + " meters from this point").openPopup();
+  L.circle(e.latlng, radius).addTo(entryMap);
+
+}
+
+entryMap.on('locationfound', onLocationFound);
+entryMap.locate({setView: true, watch: true, maxZoom: 13});
