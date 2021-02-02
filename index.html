@@ -12,313 +12,40 @@
 
         <link href="favicon.ico" rel="icon">
         
-        <link href="vendors/bootstrap/bootstrap.css" rel="stylesheet">
         <link href="vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
 
-        <link href="css/style.css" rel="stylesheet">
         <link href="css/leaflet.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-              crossorigin=""/>
-
         <link rel="preconnect" href="https://fonts.gstatic.com">
+
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
       
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"   rel="stylesheet">
-          
 
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-                crossorigin=""></script>    
-        <script src="vendors/jquery/jquery.js"></script>
-        <script src="vendors/jquery/jquery.min.js"></script>
-
-        <script type="text/javascript" src="countryBorders.geo.json"></script>
-
-        <script src="js/add.js"></script>  
-        
+        <link href="css/style.css" rel="stylesheet">
 
     </head>
 
     <body>
 
+      <div id="map">
+  
+      </div>
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-secondary pt-2">
+        <select id="countrySelect" class="form-control">
 
-        <button class="modal-open">Gazetteer</button>
-      
-        <button class="modal-open" data-modal="modal1">Weather</button>
-
-        <button class="modal-open" data-modal="modal2">Currency</button>
-      
-        <button class="modal-open" data-modal="modal3">Credits</button>
-      
-      
-      <select id="countrySelect" onchange="change_countrySelect(this.value)">
         <option value="">Choose a country:</option>
         <option value="countrySelect">Countries</option>
-      </select>
-      
-      <p id="show"></p>
-
-      <div class="modal" id="modal1">
-        <div class="modal-content">
-         <div class="modal-header">Weather conditions
-           <button class="icon modal-close"><i class="material-icons">close</i></button>
-         </div>
-         <!-- id here -->
-         <div class="modal-body">
-
-          <table>
-            <tr>
-              <th colspan="2">Day: </th>
-              <th></td></th>
-              
-            </tr>
-            <tr>
-              <td class="td2" colspan="2">Place:</td>
-              <td>
-              <!-- id -->
-              </td>
-            </tr>
-  
-  
-            <tr>
-              <tr>
-  
-                <td class="td1">
-                    Conditions: 
-                </td>
-                <td id="txtContinentName">
-                    
-                </td>
-  
-            </tr>
-  
-            <tr>
           
-                <td class="td1">
-                    Temperature: 
-                </td>
-                <td>
-                    
-                </td>
-  
-            </tr>
-  
-              <tr>
-              
-                <td class="td1">
-                  Feels like: 
-                </td>
-                <td>
-    
-                </td>
-  
-              </tr>
-  
-              <tr>
-               
-                <td class="td1">
-                  Humidity: 
-                </td>
-                <td>
-    
-                </td>
-  
-              </tr>
-  
-              <tr>
-   
-                <td class="td1">
-                    Pressure: 
-                </td>
-                <td>
-                    
-                </td>
-              </tr>
-  
-              <tr>
+        </select>
      
-                <td class="td1">
-                    Wind: 
-                </td>
-                <td>
-                    
-                </td>
-              </tr>
-  
-              <tr>
-     
-                <td class="td1">
-                    Sunrise: 
-                </td>
-                <td>
-                    
-                </td>
-              </tr>
-  
-              <tr>
-             
-                <td class="td1">
-                    Sunset: 
-                </td>
-                <td>
-                    
-                </td>
-  
-            </tr>
-  
-          </tr>
-        
-          </table>
 
-         </div> 
-         <div class="modal-footer"><button class="link modal-close">Close</button></div>
-        </div>
-      </div>
-      
-      <div class="modal" id="modal2">
-       <div class="modal-content">
-        <div class="modal-header">Currencies exchange rates
-          <button class="icon modal-close"><i class="material-icons">close</i></button>
-        </div>
-        <!-- id here -->
-        <div class="modal-body">
+        <script src="vendors/jquery/jquery.min.js"></script>
 
-          <table>
-            <tr>
-              <th colspan="2">Day: </th>
-              <th></td></th>
-              
-            </tr>
-            <tr>
-              <td class="td2" colspan="2">Exchange rate (for country): </td>
-              <td>
-              <!-- id? -->
-              </td>
-            </tr>
-  
-  
-            <tr>
-              <tr>
-  
-                <td class="td1">
-                    Country: 
-                </td>
-                <!-- <td id="txtCountryName">
-                    
-                </td>? -->
-  
-            </tr>
-  
-            <tr>
-          
-                <td class="td1">
-                    Country: 
-                </td>
-                
-  
-            </tr>
-  
-              <tr>
-              
-                <td class="td1">
-                  Country: 
-                </td>
-  
-              </tr>
-  
-              <tr>
-               
-                <td class="td1">
-                  Country: 
-                </td>
-  
-              </tr>
-  
-              <tr>
-   
-                <td class="td1">
-                  Country: 
-                </td>
-
-              </tr>
-  
-              <tr>
-     
-                <td class="td1">
-                  Country: 
-                </td>
-              
-              </tr>
-  
-              <tr>
-     
-                <td class="td1">
-                  Country: 
-                </td>
-                
-              </tr>
-            </tr>
-            
-          </tr>
-          
-          </table>
-
-        </div> 
-        <div class="modal-footer"><button class="link modal-close">Close</button></div>
-       </div>
-      </div>
-      
-      <div class="modal" id="modal3">
-       <div class="modal-content">
-        <div class="modal-header">App based on:
-          <button class="icon modal-close"><i class="material-icons">close</i></button>
-        </div>
-        <!-- id here -->
-        <div class="modal-body">
-
-          <ul class="text-left">
-        
-            <li>Geo Names <a href="https://www.geonames.org/">https://www.geonames.org</a></li>
-            <li>Exchange Rates API <a href="https://exchangeratesapi.io/" class="text-decoration-none">https://exchangeratesapi.io</a></li>
-            <li><a href="https://restcountries.eu/" class="text-decoration-none">https://restcountries.eu</a></li>
-            </ul>
-
-        </div> 
-        <div class="modal-footer"><button class="link modal-close">Close</button></div>
-       </div>
-      </div>
-
-     </nav>
-
-      <div id="entryMap" style="width: 100vw; height: 800px">
-  
-      </div>
-
-      <!-- map scripts -->
-   
-   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-            crossorigin=""></script> 
-
-   <script src="js/entrymap.js"></script>
-
-    <!-- select script -->
-
-    <script src="js/select.js"></script>
-
-    <!-- to modals -->
-
-    <script src="js/app.js"></script>
-
-        <script src="vendors/jquery/jquery-2.2.3.min.js"></script>
-        <script src="vendors/jquery/jquery.js"></script>
         <script src="vendors/bootstrap/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap/bootstrap.js"></script>
+        
+        <script src="js/leaflet.js"></script>
+
         <script src="js/script.js"></script>
     
     </body>
