@@ -35,12 +35,9 @@ map.locate({setView: true, watch: true, maxZoom: 13});
 
 
 
-
-
-//ajax call
+// document.ready
 $(document).ready(function(){
 
- 
 
   $.ajax({
 
@@ -50,84 +47,48 @@ $(document).ready(function(){
 
       dataType: 'json',
 
+      cache: false,
+
+      async: true,
+
       success: function(result) {
 
+        $ajax({
+      
+          type: 'POST',
 
+          url: 'php/getBorder.php',
 
-          $('#countrySelect').html('');
+          dataType: 'json',
 
+          cache: false,
 
+          async: true,
 
-          $.each(result.data, function(index) {
+          success: function(result) {
 
-          
+          }
 
-              $('#countrySelect').append($("<option>", {
+        })
 
-                  value: result.data[index].code,
+        if (map.hasLayer(border)) {
 
-                  text: result.data[index].name
-
-              })); 
-
-          
-
-          }); 
-
+          map.removeLayer(border);
+  
       }
-
-  })
-});
-
-
-// border
-
-const border = L.border('border');
-
-if (map.hasLayer(border)) {
-
-  map.removeLayer(border);
-
-}
-
-
-
-border = L.geoJson(result.data,{
-
-  color: '#ff7800',
-
-  weight: 2,
-
-  opacity: 0.65
-
-}).addTo(map);         
-
-
-
-map.fitBounds(border.getBounds());
-
-
-//listener to select
-
-document.getElementById('countrySelect').html; //listener should get countrySelect or border??
-
-
-//another ajax call to get border??
-$(document).ready(function(){
-
- 
-
-  $.ajax({
-
-      type: 'POST',
-
-      url: 'php/getBorder.php',     //to get border ??
-
-      dataType: 'json',
-
-      success: function(result) {
-
-
+  
+      border = L.geoJson(result.data,{
+  
+          color: '#ff7800',
+  
+          weight: 2,
+  
+          opacity: 0.65
+  
+      }).addTo(map);         
+      
+      
+      map.fitBounds(border.getBounds());
 
           $('#countrySelect').html('');
 
