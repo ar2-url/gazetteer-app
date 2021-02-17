@@ -37,18 +37,6 @@ map.on('locationfound', onLocationFound);
 map.locate({setView: true, watch: true, maxZoom: 13});
 
 
-//variable declaration
-border = L.geoJson(result.data,{
-
-  color: '#ff7800',
-
-  weight: 2,
-
-  opacity: 0.65
-
-}).addTo(map);
-
-
 // document.ready
 $(document).ready(function(){
 
@@ -90,10 +78,16 @@ $(document).ready(function(){
           map.removeLayer(border);
   
       }
-
-
-               
-      
+  
+      border = L.geoJson(result.data,{
+  
+          color: '#ff7800',
+  
+          weight: 2,
+  
+          opacity: 0.65
+  
+      }).addTo(map);         
       
       
       map.fitBounds(border.getBounds());
@@ -122,73 +116,5 @@ $(document).ready(function(){
 
   })
 });
-
-
-
-
-
-
-
-//get modal buttons
-const modalBtns = document.querySelectorAll('.modal-open');
-
-modalBtns.forEach(function(btn){
-    btn.onclick = function(){
-        const modal = btn.getAttribute('data-modal');
-
-        document.getElementById(modal).style.display = 'block';
-    };
-});
-
-const closeBtns = document.querySelectorAll('.modal-close');
-
-closeBtns.forEach(function(btn){
-    btn.onclick = function(){
-        const modal = (btn.closest('.modal').style.display = 'none');
-    };
-});
-
-window.onclick = function(e){
-    if(e.target.className == 'modal'){
-        e.target.style.display = 'none';
-    }
-};
-
-//modal element
-var modal = document.getElementById('mainModal');
-
-//open modal
-var modalBtn = document.getElementById('modalBtn');
-
-// close button
-var closeBtn = document.getElementById('closeBtn');
-
-//listen for open click
-modalBtn.addEventListener('click', openModal);
-
-//listen for close click
-modalBtn.addEventListener('click', closeModal);
-
-//listen for outside click
-window.addEventListener('click', clickOutside);
-
-//function to open modal
-function openModal(){
-    modal2.style.display = 'block';
-}
-
-//function to close modal
-function closeModal(){
-    modal.style.display = 'none';
-}
-
-//function to close modal if outside click
-function clickOutside(e){
-    if(e.target == modal){
-        modal2.style.display = 'none';
-    }
-    
-};
-
 
 
