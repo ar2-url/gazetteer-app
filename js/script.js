@@ -55,42 +55,7 @@ $(document).ready(function(){
 
       success: function(result) {
 
-        $ajax({
-      
-          type: 'POST',
-
-          url: 'php/getBorder.php',
-
-          dataType: 'json',
-
-          cache: false,
-
-          async: true,
-
-          success: function(result) {
-
-          }
-
-        })
-
-        if (map.hasLayer(border)) {
-
-          map.removeLayer(border);
-  
-      }
-  
-      border = L.geoJson(result.data,{
-  
-          color: '#ff7800',
-  
-          weight: 2,
-  
-          opacity: 0.65
-  
-      }).addTo(map);         
-      
-      
-      map.fitBounds(border.getBounds());
+        
 
           $('#countrySelect').html('');
 
