@@ -54,10 +54,32 @@ $(document).ready(function(){
       async: true,
 
       success: function(result) {
+        console.log(result);
+
+				if (result.status.name == "ok") {
+
+					
+
+          $('#countrySelect').html(result['data'][0]['name']);
+        
+          $.ajax({
+            type: 'POST',
+            url: 'php/getBorder.php',
+            dataType: 'json',
+            cache: false,
+            async: true,
+
+            success: function(result) {
 
         
+              console.log(result);
+      
+              if (result.status.name == "ok") {
+      
+      
+                $('#countrySelect').html(result['data'][0]['code']);
 
-          $('#countrySelect').html('');
+        }
 
 
 
